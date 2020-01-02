@@ -11,14 +11,19 @@ import botlib.info as info
 botid = info.getBotId()
 botid = botid[0]
 
-ingenjörCount = 0
-
 firstname   = info.setUserFirst()
 lastname    = info.setUserLast()
 discordTag  = info.setUserDiscord()
 
 class MyClient(discord.Client):
     
+    with open("count", "a"):
+        pass
+    with open("count", "r") as init:
+        ingenjörCount = init.read()
+        if ingenjörCount == "":
+            ingenjörCount = 0
+            
     async def on_ready(self):
         print(f"\nLogged on as {self.user}\n")
 
@@ -57,16 +62,25 @@ class MyClient(discord.Client):
             await sendMessage(messagelist)
             
             
-        if message.author != discordTag[5] and message.content == ('Trim!'):
+        if message.content == ('Trim!') and str(message.author) != discordTag[5]:
             messagelist = ['Ja, trim!']    
             await sendMessage(messagelist)
         
+        if message.content == ("+ingenjör"):
+            self.ingenjörCount = int(self.ingenjörCount)
+            self.ingenjörCount+=1
+            messagelist = [f"Ingenjörer: {str(self.ingenjörCount)}"]
+            await sendMessage(messagelist)
+            with open("count", "w") as file:
+                file.write(str(self.ingenjörCount))
+        
         if message.content == ('Calle, ingenjör count'):
-            messagelist = ['Jag har sagt ingenjörer {ingenjörCount} gånger', 'OCH INGENJÖRER LÖSER PROBLEM!']    
+            messagelist = ['Jag har sagt ingenjörer {self.ingenjörCount} gånger', 'OCH INGENJÖRER LÖSER PROBLEM!']    
             await sendMessages(messagelist)
         
         if message.content == ('Calle, vem bestämmer?'):
-            messagelist = [f'Inte {message.author} iallafall']    
+            pos = discordTag.index(str(message.author))
+            messagelist = [f'Inte {firstname[pos]} iallafall']    
             await sendMessage(messagelist)
         
         
