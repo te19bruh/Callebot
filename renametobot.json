@@ -2,15 +2,15 @@
     "bots": [
         {
             "name": "Calle",
-            "id": "INSERT BOT ID"
+            "id": "insert id"
         },
         {
             "name": "Solaf",
-            "id": "INSERT BOT ID"
+            "id": "insert id"
         },
         {
             "name": "Test",
-            "id": "INSERT BOT ID"
+            "id": "insert id"
         }
     ]
 }
