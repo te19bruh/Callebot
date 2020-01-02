@@ -5,7 +5,7 @@ from time import sleep
 from discord.ext import commands
 import asyncio
 import tracemalloc
-import other.info as info
+import botlib.info as info
 
 
 botid = info.getBotId()
