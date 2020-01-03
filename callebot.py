@@ -1,19 +1,15 @@
-import discord
-import random
-import string
+import discord, random, string
 from time import sleep
 from discord.ext import commands
-import asyncio
-import tracemalloc
 import botlib.info as info
 
 
 botid = info.getBotId()
 botid = botid[0]
 
-firstname   = info.setUserFirst()
-lastname    = info.setUserLast()
-discordTag  = info.setUserDiscord()
+firstname   = info.setUser("firstname")
+lastname    = info.setUser("lastname")
+discordTag  = info.setUser("discord")
 
 class MyClient(discord.Client):
     
