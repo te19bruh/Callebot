@@ -73,7 +73,7 @@ async def on_message(message):
         messagelist = ['Den där, runda..', 'knappen?.', 'Den ska ha en såndär rund knapp i mitten.',':)']    
         await sendMessage(messagelist)
         
-    if message.content == ('Trim!') and str(message.author) != discordTag[5]:
+    if message.content == ('Trim!') and str(message.author) != discordTag[1]:
         messagelist = ['Ja, trim!']    
         await sendMessage(messagelist)
     
@@ -92,7 +92,9 @@ async def on_message(message):
         await sendMessage(messagelist)
     
     if message.content == ('Calle, vem bestämmer?'):
-        name = getUserFName(message.author)
+
+        name = await getUserFName(message.author)
+
         messagelist = [f'Alla utom {name}.']    
         await sendMessage(messagelist)
 
