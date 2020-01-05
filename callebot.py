@@ -15,6 +15,7 @@ botToken = botToken[0]
 
 firstname   = info.setUser("firstname")
 lastname    = info.setUser("lastname")
+fullname    = info.setUser("fullname")
 discordTag  = info.setUser("discord")
 
 with open("count", "a"):
@@ -28,6 +29,10 @@ with open("count", "r") as init:
 async def getUserFName(userId):
     pos = discordTag.index(str(userId))
     return firstname[pos]
+
+async def getTag(fname):
+    pos = fullname.index(str(fname))
+    return discordTag[pos]
     
 async def find_channel(guild):
     for c in guild.text_channels:
@@ -73,7 +78,7 @@ async def on_message(message):
         messagelist = ['Den där, runda..', 'knappen?.', 'Den ska ha en såndär rund knapp i mitten.',':)']    
         await sendMessage(messagelist)
         
-    if message.content == ('Trim!') and str(message.author) != discordTag[1]:
+    if message.content == ('Trim!') and str(message.author) != str(await getTag("Solaf Mememaster")):
         messagelist = ['Ja, trim!']    
         await sendMessage(messagelist)
     
@@ -97,6 +102,7 @@ async def on_message(message):
 
         messagelist = [f'Alla utom {name}.']    
         await sendMessage(messagelist)
+
 
 @client.event
 async def on_member_join(member):
